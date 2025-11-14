@@ -1,0 +1,7 @@
+---
+Checks: 'readability-*, cppcoreguidelines-*, clang-analyzer-*'
+WarningsAsErrors: true
+CheckOptions:
+  - key: readability-function-size.LineThreshold
+    value: 16
+---

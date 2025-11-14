@@ -1,0 +1,6 @@
+ColumnLimit: 80
+IndentWidth: 4
+AllowShortBlocksOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: false
+BreakBeforeBraces: Attach
