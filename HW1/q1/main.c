@@ -7,6 +7,7 @@ int main(void) {
     double temperature = -1;
     scanf("%lf", &temperature); // There is at least one input
     int week = 1;
+
     // When there's only one entry, it's both the maximum and the miminum
     double maxTemp = temperature;
     double minTemp = temperature;
