@@ -3,22 +3,18 @@
 
 int main(void) {
     int input = 0;
-    char after = 0;
-    int result = scanf("%d%c", &input, &after);
+    char suffix = 0;
+    int output = 0;
+    scanf("%d%c", &input, &suffix);
 
-    if (result == 1) {
-        // "YOU FCKED UP"
-        printf("! result I guess\n");
-    }
-    printf("input: %d\nafter: %d\n", input, after);
-    bool isPositive = 0;
-    if (input > 0) {
-        isPositive = true;
+    if (suffix != '\n') {
+        printf("Error in input!\n");
     } else {
-        isPositive = false;
+        while (input != 0) {
+            output *= 10;
+            output += input % 10;
+            input /= 10;
+        }
+        printf("%d\n", output);
     }
-    printf("%d\n", isPositive);
-    // while (input != 0) {
-    //     printf("%d", isPositive);
-    // }
 }
