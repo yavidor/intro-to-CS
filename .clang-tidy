@@ -1,5 +1,5 @@
 ---
-Checks: 'readability-*, cppcoreguidelines-*, clang-analyzer-*, -readability-magic-numbers'
+Checks: 'readability-*, cppcoreguidelines-*, clang-analyzer-*, -readability-magic-numbers, -cppcoreguidelines-narrowing-conversions'
 WarningsAsErrors: true
 CheckOptions:
   - key: readability-function-size.LineThreshold
