@@ -82,7 +82,14 @@ void getInput(char input[], char key[]) {
         if (isFirstLine) {
             input[index++] = inputChar;
         } else {
-            key[index++] = inputChar;
+            if (inputChar != ' ') {
+                key[index++] = inputChar;
+            } else {
+                if (index == 0) {
+                    continue;
+                }
+                break;
+            }
         }
     }
 }
@@ -98,11 +105,7 @@ bool compareWords(const char input[], const char key[], const int wordSize,
 
 void decrypt(char text[], const int size, const int hist, char output[]) {
     for (int i = 0; i < size - 1; i++) {
-        if (text[i] != ' ' && !isAlpha(text, i)) {
-            continue;
-        }
-        if (text[i] == ' ') {
-            output[i] = ' ';
+        if (!isAlpha(text, i)) {
             continue;
         }
         output[i] =
@@ -125,15 +128,15 @@ bool validate(char text[], char key[], const int keySize) {
 }
 
 int main(void) {
-    char input[MAX_INPUT_SIZE];
-    char key[MAX_KEY_SIZE];
+    char input[MAX_INPUT_SIZE] = {0};
+    char key[MAX_KEY_SIZE] = {0};
     getInput(input, key);
     const int keySize = getWordLen(key, 0, MAX_KEY_SIZE);
     for (int hist = 0; hist < ALPHABET_SIZE; hist++) {
-        char encrypted[MAX_INPUT_SIZE];
+        char encrypted[MAX_INPUT_SIZE] = {0};
         decrypt(input, MAX_INPUT_SIZE, hist, encrypted);
         if (validate(encrypted, key, keySize)) {
-            printf("%d", ALPHABET_SIZE - hist);
+            printf("%d", (ALPHABET_SIZE - hist) % ALPHABET_SIZE);
         }
     }
     return 0;

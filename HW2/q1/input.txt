@@ -1,2 +1,2 @@
-a
-z
+way of hello world is
+hello world
