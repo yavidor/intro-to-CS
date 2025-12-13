@@ -53,7 +53,7 @@ bool isAlpha(const char text[], const int index) {
     return text[index] >= 'a' && text[index] <= 'z';
 }
 
-int getWordLen(const char text[], int index, const int maxSize) {
+int getWordLen(const char text[], int index, int maxSize) {
     int length = 0;
     while (index < maxSize && isAlpha(text, index)) {
         length++;
