@@ -1,5 +1,5 @@
 //
-// Created by yavidor on 12/12/2025.
+// Created by yavidor on 13/12/2025.
 //
 
 #include <stdbool.h>
@@ -49,11 +49,11 @@ bool compareWords(const char input[], const char key[], int wordSize,
 
 // Implementations
 
-bool isAlpha(const char text[], int index) {
+bool isAlpha(const char text[], const int index) {
     return text[index] >= 'a' && text[index] <= 'z';
 }
 
-int getWordLen(const char text[], int index, int maxSize) {
+int getWordLen(const char text[], int index, const int maxSize) {
     int length = 0;
     while (index < maxSize && isAlpha(text, index)) {
         length++;
@@ -91,7 +91,6 @@ bool compareWords(const char input[], const char key[], const int wordSize,
                   const int inputIndex) {
     int index = 0;
     while (index < wordSize && input[index + inputIndex] == key[index]) {
-      //printf("%c", input[index+inputIndex]);
         index++;
     }
     return index == wordSize;
@@ -134,7 +133,7 @@ int main(void) {
         char encrypted[MAX_INPUT_SIZE];
         decrypt(input, MAX_INPUT_SIZE, hist, encrypted);
         if (validate(encrypted, key, keySize)) {
-            printf("%d",ALPHABET_SIZE- hist);
+            printf("%d", ALPHABET_SIZE - hist);
         }
     }
     return 0;
