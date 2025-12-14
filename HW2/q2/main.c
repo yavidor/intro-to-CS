@@ -1,5 +1,5 @@
 //
-// Created by yavidor on 13/12/2025.
+// Created by yavidor on 14/12/2025.
 //
 
 #include <stdbool.h>
@@ -7,8 +7,7 @@
 
 #define PARTS 8
 #define MAX_VALUE 50
-#define MIN_VALUE 0
-#define SPECIAL_VALUE (-1)
+#define MIN_VALUE (-1)
 #define MAX_HP 100
 
 /*
@@ -36,19 +35,24 @@ void intToBoolArr(const int intArr[], bool boolArr[], int size);
 // Steps
 
 // (1.a) Check that every value is in the range (-1,50)
-bool validateInput(const int values[]);
+bool validateParts(const int values[], int size);
 
 // (3) Calculate the ship's health after the battle
 int calculateHP(const int values[], const bool marks[], int size);
+
+// Implementations
 
 bool fillArray(int arr[], const int size) {
     int input = 0;
     int index = 0;
     while (index < size) {
-        scanf("%d", &input);
+        const int scanResult = scanf("%d", &input);
+        if (scanResult != 1) {
+            return false;
+        }
         arr[index++] = input;
     }
-    return false;
+    return true;
 }
 
 void intToBoolArr(const int intArr[], bool boolArr[], const int size) {
@@ -58,14 +62,23 @@ void intToBoolArr(const int intArr[], bool boolArr[], const int size) {
         index++;
     }
 }
+bool validateParts(const int values[], const int size) {
+    for (int i = 0; i < size; i++) {
+        if (values[i] > MAX_VALUE || values[i] < MIN_VALUE) {
+            return false;
+        }
+    }
+    return true;
+}
 
 int calculateHP(const int values[], const bool marks[], const int size) {
     int healthPoints = MAX_HP;
     for (int i = 0; i < size; i++) {
-        if (marks[i] == false) {
+        if (marks[i]) {
             healthPoints -= values[i];
-        } else if (values[i] == -1) {
-            return 0;
+            if (values[i] == -1) {
+                return 0;
+            }
         }
     }
     return healthPoints;
@@ -73,30 +86,38 @@ int calculateHP(const int values[], const bool marks[], const int size) {
 
 int main(void) {
     printf("Please enter ship's parts value:\n");
-    int ShipValues[PARTS] = {0};
-    fillArray(ShipValues, PARTS);
-
+    int shipValues[PARTS] = {0};
+    if (!(fillArray(shipValues, PARTS) && validateParts(shipValues, PARTS))) {
+        printf("There was an error in input");
+        return 1;
+    }
     int firstShipMarksInts[PARTS] = {0};
     int secondShipMarksInts[PARTS] = {0};
     bool firstShipMarks[PARTS] = {0};
     bool secondShipMarks[PARTS] = {0};
     printf("Please enter first ship's hit marks:\n");
-    fillArray(firstShipMarksInts, PARTS);
+    if (!fillArray(firstShipMarksInts, PARTS)) {
+        printf("There was an error in input");
+        return 1;
+    }
     printf("Please enter second ship's hit marks:\n");
-    fillArray(secondShipMarksInts, PARTS);
+    if (!fillArray(secondShipMarksInts, PARTS)) {
+        printf("There was an error in input");
+        return 1;
+    }
     intToBoolArr(firstShipMarksInts, firstShipMarks, PARTS);
     intToBoolArr(secondShipMarksInts, secondShipMarks, PARTS);
-    const int firstShipHP = calculateHP(ShipValues, firstShipMarks, PARTS);
-    const int secondShipHP = calculateHP(ShipValues, secondShipMarks, PARTS);
-    if (firstShipHP == 0 && secondShipHP == 0) {
+    const int firstShipHP = calculateHP(shipValues, firstShipMarks, PARTS);
+    const int secondShipHP = calculateHP(shipValues, secondShipMarks, PARTS);
+    if (firstShipHP <= 0 && secondShipHP <= 0) {
         printf("Both ships have lost the battle!\n");
-    } else if (firstShipHP != 0 && secondShipHP != 0) {
+    } else if (firstShipHP > 0 && secondShipHP > 0) {
         printf("Both ships survived the battle!\n");
     } else {
         if (firstShipHP == 0) {
-            printf("Ship 2 has won the battle!\n");
+            printf("Ship #2 has won the battle!\n");
         } else {
-            printf("Ship 1 has won the battle!\n");
+            printf("Ship #1 has won the battle!\n");
         }
     }
     return 0;
