@@ -1,0 +1,29 @@
+{
+  "tests": [
+    {
+      "name": "Every letter",
+      "input": "26 a b c d e f g h i j k l m n o p q r s t u v w x y z",
+      "output": "26"
+    },
+    {
+      "name": "Every letter reverse",
+      "input": "26 z y x w v u t s r q p o n m l k j i h g f e d c b a",
+      "output": "26"
+    },
+    {
+      "name": "Every letter TWICE",
+      "input": "52 a a b b c c d d e e f f g g h h i i j j k k l l m m n n o o p p q q r r s s t t u u v v w w x x y y z z",
+      "output": "26"
+    },
+    {
+      "name": "All a",
+      "input": "3 a a a",
+      "output": "1"
+    },
+    {
+      "name": "Vowels",
+      "input": "5 a e i o u",
+      "output": "5"
+    }
+  ]
+}

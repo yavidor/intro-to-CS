@@ -1,0 +1,19 @@
+{
+  "tests": [
+    {
+      "name": "Exact power",
+      "input": "128",
+      "output": "4"
+    },
+    {
+      "name": "Exact power minus one",
+      "input": "127",
+      "output": "4"
+    },
+    {
+      "name": "Insert DBZ Joke Here",
+      "input": "9001",
+      "output": "5"
+    }
+  ]
+}
