@@ -5,8 +5,36 @@
 #include <stdlib.h>
 #define M 1000
 
-int lenPacmanPath(char mat[][M], int n,
-                  int m); // Replace this line with your function.
+void makeMove(int position[], char direction, int n, int m) {
+    switch (direction) {
+    case 'U':
+        position[0] = (position[0] + n - 1) % n;
+        break;
+    case 'D':
+        position[0] = (position[0] + 1) % n;
+        break;
+    case 'L':
+        position[1] = (position[1] + m - 1) % m;
+        break;
+    case 'R':
+        position[1] = (position[1] + 1) % m;
+        break;
+    }
+}
+
+int lenPacmanPath(char mat[][M], int n, int m) {
+    int pos[] = {0, 0};
+    int length = 0;
+    char direction = 0;
+    do {
+        if (mat[pos[0]][pos[1]] != '#') {
+            direction = mat[pos[0]][pos[1]];
+        }
+        length++;
+        makeMove(pos, direction, n, m);
+    } while (!(pos[0] == 0 && pos[1] == 0) && length < n * m);
+    return length < n * m ? length : -1;
+}
 
 // Do not change these functions
 void fillMatrix(char mat[][M], int n, int m) {
