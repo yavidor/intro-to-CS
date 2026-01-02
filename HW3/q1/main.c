@@ -32,8 +32,11 @@ int lenPacmanPath(char mat[][M], int n, int m) {
         }
         length++;
         makeMove(pos, direction, n, m);
-    } while (!(pos[0] == 0 && pos[1] == 0) && length < n * m);
-    return length < n * m ? length : -1;
+    } while (!(pos[0] == 0 && pos[1] == 0) && length <= n * m);
+    if (length <= n * m) {
+        return length;
+    }
+    return -1;
 }
 
 // Do not change these functions
