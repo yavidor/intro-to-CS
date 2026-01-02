@@ -11,12 +11,12 @@ bool validatePair(int m, int index, int height) {
     return height >= 0 && index >= 0 && index < m;
 }
 
-void raiseSegments(int m, int segments[]) {
-    scanf("%d ", &m);
+void raiseSegments(int *m, int segments[]) {
+    scanf(" %d", m);
     int index = 0;
     int height = 0;
-    while (scanf("%d %d ", &index, &height) == 2) {
-        if (validatePair(m, index, height)) {
+    while (scanf(" %d %d", &index, &height) == 2) {
+        if (validatePair(*m, index, height)) {
             segments[index] += height;
         }
     }
@@ -27,7 +27,7 @@ void raiseSegments(int m, int segments[]) {
 int calc_trapped_water() {
     int m = 0;
     int segments[MAX_SEGMENTS] = {0};
-    raiseSegments(m, segments);
+    raiseSegments(&m, segments);
     for (int i = 0; i < m; i++) {
         printf("%d: %d\n", i, segments[i]);
     }
