@@ -21,16 +21,52 @@ void raiseSegments(int *m, int segments[]) {
         }
     }
 }
+int min(int first, int second) {
+    if (first < 0 && second < 0) {
+        return 0;
+    }
+    if (first >= second) {
+        return second;
+    }
+    return first;
+}
+
+int getLeftBoundary(int segments[], int initialIndex) {
+    for (int i = initialIndex; i > 0; i--) {
+        if (segments[i] >= segments[initialIndex]) {
+            return segments[i];
+        }
+    }
+    return segments[initialIndex];
+}
+
+int getRightBoundary(int segments[], int initialIndex, int m) {
+    for (int i = initialIndex; i < m; i++) {
+        if (segments[i] >= segments[initialIndex]) {
+            return segments[i];
+        }
+    }
+    return segments[initialIndex];
+}
+
+int addWater(int m, int segments[], int index) {
+    int left = getLeftBoundary(segments, index);
+    int right = getRightBoundary(segments, index, m);
+    return min(left - segments[index], right - segments[index]);
+}
 
 // Implement the function to calculate trapped water you may add more helper
 // functions if needed
 int calc_trapped_water() {
     int m = 0;
     int segments[MAX_SEGMENTS] = {0};
+    int sum = 0;
     raiseSegments(&m, segments);
-    for (int i = 0; i < m; i++) {
+    for (int i = 1; i < m - 1; i++) {
         printf("%d: %d\n", i, segments[i]);
+        sum += addWater(m, segments, i);
     }
+    printf("%d\n", sum);
     return 0;
 }
 
