@@ -32,8 +32,8 @@ int min(int first, int second) {
 }
 
 int getLeftBoundary(int segments[], int initialIndex) {
-    for (int i = initialIndex; i > 0; i--) {
-        if (segments[i] >= segments[initialIndex]) {
+    for (int i = 0; i < initialIndex; i++) {
+        if (segments[i] > segments[initialIndex]) {
             return segments[i];
         }
     }
@@ -41,8 +41,8 @@ int getLeftBoundary(int segments[], int initialIndex) {
 }
 
 int getRightBoundary(int segments[], int initialIndex, int m) {
-    for (int i = initialIndex; i < m; i++) {
-        if (segments[i] >= segments[initialIndex]) {
+    for (int i = m - 1; i > initialIndex; i--) {
+        if (segments[i] > segments[initialIndex]) {
             return segments[i];
         }
     }
@@ -63,11 +63,9 @@ int calc_trapped_water() {
     int sum = 0;
     raiseSegments(&m, segments);
     for (int i = 1; i < m - 1; i++) {
-        printf("%d: %d\n", i, segments[i]);
         sum += addWater(m, segments, i);
     }
-    printf("%d\n", sum);
-    return 0;
+    return sum;
 }
 
 int main() {
