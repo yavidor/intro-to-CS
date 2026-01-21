@@ -225,7 +225,7 @@ char *get_link(char *word1, int len1, char *word2, int len2) {
     char **subs2 = get_all_sub_strings(word2, len2);
     int len = 0;
     char **both = get_both(subs1, pow_of_2(len1), subs2, pow_of_2(len2), &len);
-    int best = 0;
+    int best = -1;
     for (int i = 0; i < len; i++) {
         if (best == -1 || lenstr(both[i]) > lenstr(both[best])) {
             best = i;
