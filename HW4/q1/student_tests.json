@@ -1,0 +1,94 @@
+{
+  "tests": [
+    {
+      "name": "1. PDF Example 1 (Basic)",
+      "input": "3\naa aa\naaa bbb aaaa\naa aa bbb",
+      "output": "aa aa\n"
+    },
+    {
+      "name": "3. PDF Example 3 (Complex LCS)",
+      "input": "2\ntgtgt ttgt ttggg\nuvuv vuvu vvvu vvvv uvvu",
+      "output": "tgtgt ttgt ttggg\n"
+    },
+    {
+      "name": "4. Tie Break - First Wins",
+      "input": "2\naa aa\nbb bb",
+      "output": "aa aa\n"
+    },
+    {
+      "name": "5. Edge Case - Single Word (Distance 0)",
+      "input": "2\nhello\nworld world",
+      "output": "hello\n"
+    },
+    {
+      "name": "6. Logic Check - All Pairs (Triangle Inequality)",
+      "input": "2\nabc b d\nx y z",
+      "output": "x y z\n"
+    },
+    {
+      "name": "7. Logic Check - The Ladder Trap",
+      "input": "2\naaaa a\na ab abc abcd",
+      "output": "aaaa a\n"
+    },
+    {
+      "name": "8. Logic Check - Disjoint Words",
+      "input": "2\nabc def\na b",
+      "output": "a b\n"
+    },
+    {
+      "name": "9. Logic Check - Anagrams",
+      "input": "2\nabc cba\nxy yx",
+      "output": "xy yx\n"
+    },
+    {
+      "name": "10. Logic Check - Interleaved",
+      "input": "2\naabb ab\na b",
+      "output": "aabb ab\n"
+    },
+    {
+      "name": "11. Logic Check - Substrings",
+      "input": "2\ncat scatter\ndog dogma",
+      "output": "dog dogma\n"
+    },
+    {
+      "name": "12. Parsing - Multiple Spaces",
+      "input": "2\na   b\nxx yy",
+      "output": "a   b\n"
+    },
+    {
+      "name": "13. Parsing - Leading Spaces",
+      "input": "2\n  a b\nx y",
+      "output": "  a b\n"
+    },
+    {
+      "name": "14. Edge Case - Identical Words (Distance 0)",
+      "input": "2\nword word\na b",
+      "output": "word word\n"
+    },
+    {
+      "name": "16. Edge Case - Long vs Short",
+      "input": "2\nzzzzzzzz zzzzzzzz\na b",
+      "output": "zzzzzzzz zzzzzzzz\n"
+    },
+    {
+      "name": "17. Edge Case - Single Sentence Input",
+      "input": "1\nlonely sentence",
+      "output": "lonely sentence\n"
+    },
+    {
+      "name": "18. Edge Case - Repeated Chars",
+      "input": "2\naaaaa aa\nbb b",
+      "output": "bb b\n"
+    },
+    {
+      "name": "19. Stress - Complex Mix",
+      "input": "3\nxx yy zz\na b c\nmmm nnn",
+      "output": "a b c\n"
+    },
+    {
+      "name": "20. Stress - Many Words",
+      "input": "2\na b c d e f\naa bb",
+      "output": "a b c d e f\n"
+    }
+  ]
+}

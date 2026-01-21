@@ -4,14 +4,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void notmain(char *str) {
-    *(str + 1) += 1;
-    printf("%s\n", str);
-}
-
 int main(void) {
-    char sarr[] = "Camels are good";
-    char *parr = "I love camels";
-    notmain(sarr);
-    notmain(parr);
+    double *something = malloc(3 * sizeof(double));
+    *something = 1.0;
+    *(something + 1) = 2.0;
+    *(something + 2) = 3.0;
+    double *somethingElse = something;
+    (*somethingElse)++;
+    somethingElse+=2;
+    printf("%lf\n", *something);
+    printf("%lf\n", *somethingElse);
+    free(something);
 }
