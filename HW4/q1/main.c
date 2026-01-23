@@ -145,6 +145,9 @@ int get_length(char *word1, char *word2, char *link) {
     return word1len + word2len - (2 * linklength);
 }
 
+// str: The string
+// n: The length of the string
+// pos: The current position within the string
 int get_next_space(char *str, int n, int pos) {
     while (pos < n) {
         if (*(str + pos) == ' ') {
@@ -155,6 +158,8 @@ int get_next_space(char *str, int n, int pos) {
     return -1;
 }
 
+// str: The string
+// n: The length of the string
 int get_words_count(char *str, int n) {
     int pos = 0;
     int count = 0;
@@ -166,6 +171,7 @@ int get_words_count(char *str, int n) {
     return count;
 }
 
+// str: The original string
 char *clonestr(char *str) {
     int length = lenstr(str) + 1;
     char *ret = (char *)malloc((length) * sizeof(char));
