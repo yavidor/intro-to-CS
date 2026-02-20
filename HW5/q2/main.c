@@ -10,7 +10,7 @@
 bool checkRow(int board[N][N], int row);
 bool checkCol(int board[N][N], int col);
 bool checkSquares(int board[N][N], int row, int col);
-bool isLegal(int board[N][N], int row, int col);
+bool isLegal(int board[N][N], int row, int col, int value);
 int countZeros(int board[N][N]);
 void getNextZero(int board[N][N], int *row, int *col);
 
@@ -35,7 +35,10 @@ void printBoard(int board[N][N]) {
 bool checkRow(int board[N][N], int row) {
     bool values[N] = {0};
     for (int i = 0; i < N; i++) {
-        int boardValue = board[row][i];
+        int boardValue = board[row][i] - 1;
+        if (boardValue < 0) {
+            continue;
+        }
         if (values[boardValue] == true) {
             return false;
         }
@@ -47,7 +50,10 @@ bool checkRow(int board[N][N], int row) {
 bool checkCol(int board[N][N], int col) {
     bool values[N] = {0};
     for (int i = 0; i < N; i++) {
-        int boardValue = board[i][col];
+        int boardValue = board[i][col] - 1;
+        if (boardValue < 0) {
+            continue;
+        }
         if (values[boardValue] == true) {
             return false;
         }
@@ -56,25 +62,75 @@ bool checkCol(int board[N][N], int col) {
     return true;
 }
 bool checkSquares(int board[N][N], int row, int col) {
-
-
+    int squareRow = row / N_ROOT;
+    int squareCol = col / N_ROOT;
+    bool values[N] = {0};
+    for (int i = 0; i < N_ROOT; i++) {
+        for (int j = 0; j < N_ROOT; j++) {
+            int boardValue =
+                board[(squareRow * N_ROOT) + i][(squareCol * N_ROOT) + j] - 1;
+            if (boardValue < 0) {
+                continue;
+            }
+            if (values[boardValue] == true) {
+                return false;
+            }
+            values[boardValue] = true;
+        }
+    }
+    return true;
 }
-bool isLegal(int board[N][N], int row, int col) {
-    return checkCol(board, col) && checkRow(board, row) &&
-           checkSquares(board, row, col);
+
+bool isLegal(int board[N][N], int row, int col, int value) {
+    int prevValue = board[row][col];
+    board[row][col] = value;
+    bool flag = checkCol(board, col) && checkRow(board, row) &&
+                checkSquares(board, row, col);
+    board[row][col] = prevValue;
+    return flag;
+}
+int countZeros(int board[N][N]) {
+    int counter = 0;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            if (board[i][j] == 0) {
+                counter++;
+            }
+        }
+    }
+    return counter;
+}
+void getNextZero(int board[N][N], int *row, int *col) {
+    for (int i = *row; i < N; i++) {
+        for (int j = 0; j < N; ++j) {
+            if (i == *row && j < *col) {
+                continue;
+            }
+            if (board[i][j] == 0) {
+                *row = i;
+                *col = j;
+                return;
+            }
+        }
+    }
+    *row = -1;
+    *col = -1;
 }
 
 bool findSolution(int board[N][N], int row, int col) {
-    if (board[row][col] != 0 || (row == N - 1 && col == N - 1)) {
-        return isLegal(board, row, col);
-    }
     bool flag = false;
     for (int value = 1; value <= N; value++) {
-        if (!isLegal(board, row, col)) {
+        if (!isLegal(board, row, col, value)) {
             continue;
         }
+        int nextRow = row;
+        int nextCol = col;
         board[row][col] = value;
-        flag = flag || findSolution(board, row, col);
+        getNextZero(board, &nextRow, &nextCol);
+        if (nextRow == -1 || findSolution(board, nextRow, nextCol)) {
+            return true;
+        }
+        board[row][col] = 0;
     }
     return flag;
 }
@@ -82,14 +138,13 @@ bool findSolution(int board[N][N], int row, int col) {
 // Write your solution in this function.
 // You may (and encourage to) use as many helper functions as you want.
 bool solveSudoku(int board[N][N]) {
-    bool flag = false;
+    bool flag = true;
     int row = 0;
     int col = 0;
     while (countZeros(board) != false) {
         getNextZero(board, &row, &col);
         flag = findSolution(board, row, col);
-        printf("%d\n", flag);
-        if (flag == true) {
+        if (flag == false) {
             return flag;
         }
     }
