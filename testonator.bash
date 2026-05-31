@@ -19,7 +19,7 @@ jq -c '.tests[]' "$TESTS_PATH" | sed --expression='s/\n/\\n/g' | while read -r l
     echo ----------
 
     # This too, I don't like it but it works (:
-    PROGRAM_OUTPUT=$("$PROGRAM_PATH" <<< "$(echo -e "$TEST_INPUT")")
+    PROGRAM_OUTPUT=$("$PROGRAM_PATH" <<< "$(echo -en "$TEST_INPUT")")
     if [[ "$PROGRAM_OUTPUT" !=  "$TEST_OUTPUT" ]]
     then
         echo -en "$RED"
@@ -27,7 +27,7 @@ jq -c '.tests[]' "$TESTS_PATH" | sed --expression='s/\n/\\n/g' | while read -r l
         echo "On test: $TEST_NAME"
         echo "Input: $TEST_INPUT" 
         echo "Expected: $TEST_OUTPUT"
-        echo "Recieved: $PROGRAM_OUTPUT"
+        echo "Received: $PROGRAM_OUTPUT"
         echo -en "$CLEAR"
     else
         echo -en "$GREEN"

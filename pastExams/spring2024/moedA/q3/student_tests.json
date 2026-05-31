@@ -1,0 +1,69 @@
+{
+  "tests": [
+    {
+      "name": "Test from exam",
+      "input": "24\nopen minds lead to idea",
+      "output": "idea to lead minds open "
+    },
+    {
+      "name": "Single word",
+      "input": "6\nhello",
+      "output": "hello "
+    },
+    {
+      "name": "Two words",
+      "input": "12\nhello world",
+      "output": "world hello "
+    },
+    {
+      "name": "Words of varying lengths",
+      "input": "18\na quick brown fox",
+      "output": "fox brown quick a "
+    },
+    {
+      "name": "Many single-letter words",
+      "input": "14\na b c d e f g",
+      "output": "g f e d c b a "
+    },
+    {
+      "name": "Words containing numbers and punctuation",
+      "input": "21\nstep 1 is complete !",
+      "output": "! complete is 1 step "
+    },
+    {
+      "name": "Long sequence of words",
+      "input": "44\nthe quick brown fox jumps over the lazy dog",
+      "output": "dog lazy the over jumps fox brown quick the "
+    },
+    {
+      "name": "Single giant word (Edge Case: No middle boundaries)",
+      "input": "35\nsupercalifragilisticexpialidocious",
+      "output": "supercalifragilisticexpialidocious "
+    },
+    {
+      "name": "Palindromic words (Edge Case: Catches accidental character reversals)",
+      "input": "20\nmadam racecar stats",
+      "output": "stats racecar madam "
+    },
+    {
+      "name": "Palindromic sentence (Edge Case: Swap logic running too far)",
+      "input": "28\nalpha beta gamma beta alpha",
+      "output": "alpha beta gamma beta alpha "
+    },
+    {
+      "name": "Repeated words (Edge Case: Finding boundaries by unique chars)",
+      "input": "32\nbuffalo buffalo buffalo buffalo",
+      "output": "buffalo buffalo buffalo buffalo "
+    },
+    {
+      "name": "Drastically varying word lengths (Edge Case: Pointer arithmetic)",
+      "input": "37\na antidisestablishmentarianism is ok",
+      "output": "ok is antidisestablishmentarianism a "
+    },
+    {
+      "name": "Exactly 30 words (Edge Case: Exam's maximum allowed size)",
+      "input": "111\nw1 w2 w3 w4 w5 w6 w7 w8 w9 w10 w11 w12 w13 w14 w15 w16 w17 w18 w19 w20 w21 w22 w23 w24 w25 w26 w27 w28 w29 w30",
+      "output": "w30 w29 w28 w27 w26 w25 w24 w23 w22 w21 w20 w19 w18 w17 w16 w15 w14 w13 w12 w11 w10 w9 w8 w7 w6 w5 w4 w3 w2 w1 "
+    }
+  ]
+}
