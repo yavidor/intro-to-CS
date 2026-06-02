@@ -3,6 +3,18 @@
 PROGRAM_PATH="${1}"
 TESTS_PATH="${2}"
 
+echo "${PROGRAM_PATH}"
+
+echo $([ -z "$PROGRAM_PATH" ])
+
+echo "HELLO"
+
+if [ -z "${PROGRAM_PATH}" ] || [ -z "${TESTS_PATH}" ]; then
+    echo "Error: incorrect parameters"
+    echo "Usage: $0 <PROGRAM_PATH> <TESTS_PATH>"
+    echo "If you're using CLion, <PROGRAM_PATH> will be the executable inside cmake-build-debug"
+    echo "TESTS_PATH is the path to student_tests.json"
+    exit 1
 
 # COLORS, I love ANSI
 CLEAR='\033[0m'
